@@ -1186,95 +1186,88 @@
     </div>
   </section>
 
-  <section id="projects-cards" class="projects-overlay" aria-hidden="true">
-    <h2 class="projects-overlay__title">Bienvenue sur mes projets</h2>
-    <p class="projects-overlay__intro">Découvrez une sélection de projets mettant en avant mon profil full-stack, mon intérêt pour l’IA et mon sens du design.</p>
-    <div class="projects-list">
-      <article class="project-card" data-project-card>
-        <header class="project-card__header">
-          <h3 class="project-card__title">🧠 Job Board</h3>
-          <p class="project-card__subtitle">EPITECH – 2025</p>
-          <p class="project-card__summary">Plateforme reliant étudiants et entreprises pour publier et suivre des offres d’emploi.</p>
-          <p class="project-card__tech"><strong>Technologies&nbsp;:</strong> PHP, MariaDB, JavaScript, Materialize, REST API, JWT</p>
-        </header>
-        <button class="project-card__toggle" type="button" data-project-toggle data-expand-label="En savoir plus" data-collapse-label="Réduire">En savoir plus</button>
-        <div class="project-card__details" data-project-details hidden>
-          <p><strong>Description&nbsp;:</strong> Plateforme web sécurisée permettant aux entreprises de publier des offres, aux étudiants de candidater et à l’administrateur de suivre l’activité.</p>
-          <p><strong>Rôle&nbsp;:</strong> Développement du backend (API REST sécurisée, base MariaDB, gestion des JWT) et conception du frontend dynamique avec Materialize.</p>
-          <p><strong>Résultat&nbsp;:</strong> Application 100&nbsp;% fonctionnelle constituant une base solide pour une mise en ligne future.</p>
-          <p><strong>Compétences&nbsp;:</strong> Architecture REST, sécurité JWT, intégration frontend-backend, SQL, responsive design.</p>
-          <p><strong>Lien&nbsp;:</strong> <a href="https://github.com/anahitadormishian/job-board" target="_blank" rel="noopener noreferrer">GitHub – Job Board</a></p>
-        </div>
-      </article>
+  <section id="projects-cards" class="projects-overlay projects-overlay--visible">
+  <h2 class="section-title">🌟 Bienvenue sur mes projets</h2>
+  <div class="projects-list">
 
-      <article class="project-card" data-project-card>
-        <header class="project-card__header">
-          <h3 class="project-card__title">🎮 ItOn – Simulation Game</h3>
-          <p class="project-card__subtitle">Python – 2025</p>
-          <p class="project-card__summary">Prototype de mini-jeu stratégique mêlant IA, gestion d’événements et programmation orientée objet.</p>
-          <p class="project-card__tech"><strong>Technologies&nbsp;:</strong> Python (OOP, logique de jeu)</p>
-        </header>
-        <button class="project-card__toggle" type="button" data-project-toggle data-expand-label="En savoir plus" data-collapse-label="Réduire">En savoir plus</button>
-        <div class="project-card__details" data-project-details hidden>
-          <p><strong>Description&nbsp;:</strong> Prototype de jeu de simulation combinant intelligence artificielle, gestion des entités et évènements.</p>
-          <p><strong>Rôle&nbsp;:</strong> Conception de la logique principale, structuration des classes (héritage, interactions) et gestion de l’état du jeu.</p>
-          <p><strong>Compétences&nbsp;:</strong> Algorithmique, programmation orientée objet, modélisation de comportements, architecture logicielle.</p>
-        </div>
-      </article>
+    <!-- Job Board -->
+    <article class="project-card" data-project-card>
+      <div class="project-card__header">
+        <h3 class="project-card__title">💼 Job Board (EPITECH )</h3>
+      </div>
+      <button class="project-card__toggle" data-project-toggle>En savoir plus</button>
+      <div class="project-card__details" data-project-details hidden>
+        <p><strong>Technologies :</strong> PHP, MariaDB, JavaScript, Materialize, REST API, JWT</p>
+        <p><strong>Description :</strong> Plateforme web reliant étudiants et entreprises, permettant de publier, consulter et candidater à des offres d’emploi.</p>
+        <p><strong>Rôle :</strong> Développement du backend (API sécurisée, base de données, gestion JWT) et conception du frontend dynamique avec Materialize.</p>
+        <p><strong>Résultat :</strong> Application 100 % fonctionnelle, base solide pour une mise en ligne future.</p>
+        <p><strong>Compétences :</strong> architecture REST, sécurité JWT, intégration frontend-backend, SQL, responsive design.</p>
+        <p><strong>Lien :</strong> <a href="https://github.com/anahitadormishian/jobboard" target="_blank">GitHub – Job Board</a></p>
+      </div>
+    </article>
 
-      <article class="project-card" data-project-card>
-        <header class="project-card__header">
-          <h3 class="project-card__title">🔬 Vision Laser</h3>
-          <p class="project-card__subtitle">Dorreh Sanat – 2020</p>
-          <p class="project-card__summary">Outil interne de visualisation 3D pour vérifier l’alignement des faisceaux laser.</p>
-          <p class="project-card__tech"><strong>Technologies&nbsp;:</strong> Python, Three.js, Excel</p>
-        </header>
-        <button class="project-card__toggle" type="button" data-project-toggle data-expand-label="En savoir plus" data-collapse-label="Réduire">En savoir plus</button>
-        <div class="project-card__details" data-project-details hidden>
-          <p><strong>Description&nbsp;:</strong> Outil de visualisation pour contrôler en 3D l’alignement des faisceaux et anticiper les recalibrages.</p>
-          <p><strong>Rôle&nbsp;:</strong> Création du script Python automatisant les calculs et intégration du modèle 3D via Three.js.</p>
-          <p><strong>Résultat&nbsp;:</strong> Réduction de 30&nbsp;% des recalibrages et gain de temps pour les équipes R&amp;D.</p>
-          <p><strong>Compétences&nbsp;:</strong> Traitement de données, visualisation 3D, automatisation, analyse R&amp;D.</p>
-        </div>
-      </article>
+    <!-- ItOn -->
+    <article class="project-card" data-project-card>
+      <div class="project-card__header">
+        <h3 class="project-card__title">🎮 Hangman (Python)</h3>
+      </div>
+      <button class="project-card__toggle" data-project-toggle>En savoir plus</button>
+      <div class="project-card__details" data-project-details hidden>
+        <p><strong>Technologies :</strong> Python (OOP, logique de jeu)</p>
+        <p><strong>Description :</strong> Prototype d’un mini-jeu en Python basé sur la stratégie et la simulation, combinant intelligence artificielle et gestion d’événements.</p>
+        <p><strong>Rôle :</strong> Conception de la logique principale, gestion des entités et des interactions (classes, héritage, état du jeu).</p>
+        <p><strong>Compétences :</strong> algorithmique, programmation orientée objet, simulation, structuration de code.</p>
+      </div>
+    </article>
 
-      <article class="project-card" data-project-card>
-        <header class="project-card__header">
-          <h3 class="project-card__title">🌐 Portfolio – Site personnel</h3>
-          <p class="project-card__subtitle">EPITECH – 2025</p>
-          <p class="project-card__summary">Site web personnel pour présenter compétences, projets et parcours professionnel.</p>
-          <p class="project-card__tech"><strong>Technologies&nbsp;:</strong> HTML, CSS, JavaScript, Materialize, Figma</p>
-        </header>
-        <button class="project-card__toggle" type="button" data-project-toggle data-expand-label="En savoir plus" data-collapse-label="Réduire">En savoir plus</button>
-        <div class="project-card__details" data-project-details hidden>
-          <p><strong>Description&nbsp;:</strong> Conception d’un site responsive avec sections dynamiques pour les compétences, projets et la prise de contact.</p>
-          <p><strong>Rôle&nbsp;:</strong> Design complet sur Figma, intégration front-end, optimisation de l’expérience utilisateur.</p>
-          <p><strong>Compétences&nbsp;:</strong> Responsive design, UI/UX, intégration front-end, structure SEO.</p>
-        </div>
-      </article>
+    <!-- Vision Laser -->
+    <article class="project-card" data-project-card>
+      <div class="project-card__header">
+        <h3 class="project-card__title">🔬 Vision Laser (Dorreh Sanat)</h3>
+      </div>
+      <button class="project-card__toggle" data-project-toggle>En savoir plus</button>
+      <div class="project-card__details" data-project-details hidden>
+        <p><strong>Technologies :</strong> Python, Three.js, Excel</p>
+        <p><strong>Description :</strong> Outil interne de visualisation 3D pour vérifier l’alignement des faisceaux laser et réduire les recalibrages en production.</p>
+        <p><strong>Rôle :</strong> Création du script Python pour automatiser les calculs et intégration du modèle 3D via Three.js.</p>
+        <p><strong>Résultat :</strong> Réduction de 30 % des recalibrages et gain de temps en R&D.</p>
+        <p><strong>Compétences :</strong> traitement de données, visualisation 3D, R&D, automatisation.</p>
+      </div>
+    </article>
 
-      <article class="project-card" data-project-card>
-        <header class="project-card__header">
-          
-          
-        </header>
-        <button class="project-card__toggle" type="button" data-project-toggle data-expand-label="En savoir plus" data-collapse-label="Réduire">En savoir plus</button>
-        <div class="project-card__details" data-project-details hidden>
-          <p><strong>Description&nbsp;:</strong> Développement de sites vitrine complets pour promouvoir les dispositifs médicaux.</p>
-          <p><strong>Rôle&nbsp;:</strong> Design du front-end, création des pages d’administration et gestion du contenu.</p>
-          <p><strong>Compétences&nbsp;:</strong> Design web, bases de données, UX pour utilisateurs non techniques.</p>
-        </div>
-      </article>
+    <!-- Portfolio -->
+    <article class="project-card" data-project-card>
+      <div class="project-card__header">
+        <h3 class="project-card__title">🌐 Portfolio – Site personnel (EPITECH)</h3>
+      </div>
+      <button class="project-card__toggle" data-project-toggle>En savoir plus</button>
+      <div class="project-card__details" data-project-details hidden>
+        <p><strong>Technologies :</strong> HTML, CSS, JS, Materialize, Figma</p>
+        <p><strong>Description :</strong> Site web personnel conçu pour présenter mes compétences, projets et parcours professionnel.</p>
+        <p><strong>Rôle :</strong> Design complet de l’interface, intégration des sections dynamiques (skills, contact, projets).</p>
+        <p><strong>Compétences :</strong> responsive design, UI/UX, intégration front-end, structure SEO.</p>
+        <p><strong>Lien :</strong> <a href="#">Portfolio en ligne</a></p>
+      </div>
+    </article>
 
-      <article class="project-card" data-project-card>
-        
-        <button class="project-card__toggle" type="button" data-project-toggle data-expand-label="En savoir plus" data-collapse-label="Réduire">En savoir plus</button>
-        <div class="project-card__details" data-project-details hidden>
-          <p><strong>Description&nbsp;:</strong> Logo typographique persan combinant tradition et modernité pour représenter une identité culturelle forte.</p>
-          <p><strong>Compétences&nbsp;:</strong> Direction artistique, typographie, storytelling visuel.</p>
-        </div>
-      </article>
-    </div>
+    <!-- Dorreh Sanat Web -->
+    <article class="project-card" data-project-card>
+      <div class="project-card__header">
+        <h3 class="project-card__title">🏥 Dorreh Sanat Web (Projets Réels)</h3>
+      </div>
+      <button class="project-card__toggle" data-project-toggle>En savoir plus</button>
+      <div class="project-card__details" data-project-details hidden>
+        <p><strong>Technologies :</strong> HTML, CSS, JS, PHP, MySQL</p>
+        <p><strong>Description :</strong> Développement de plusieurs sites vitrine pour présenter les produits médicaux de Dorreh Sanat.</p>
+        <p><strong>Rôle :</strong> Conception du front-end, intégration des pages administratives, gestion du contenu.</p>
+        <p><strong>Compétences :</strong> design web, base de données, UX pour utilisateurs non-techniques.</p>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+
   </section>
 
   <footer>© 2025 Anahita Dormishian</footer>
@@ -1288,29 +1281,29 @@
 
   <!-- ماژول اصلی که از سه بعدی استفاده می‌کند -->
   <script type="module" src="js/main.js"></script>
-    <script type="module">
-    const projectCards = document.querySelectorAll('[data-project-card]');
-    projectCards.forEach((card, index) => {
+  <script>
+    document.querySelectorAll('[data-project-card]').forEach(card => {
       const button = card.querySelector('[data-project-toggle]');
       const details = card.querySelector('[data-project-details]');
-      if (!button || !details) {
-        return;
-      }
-      const expandLabel = button.dataset.expandLabel ?? 'En savoir plus';
-      const collapseLabel = button.dataset.collapseLabel ?? 'Réduire';
-      if (!details.id) {
-        details.id = `project-details-${index}`;
-      }
-      button.setAttribute('aria-controls', details.id);
+      if (!button || !details) return;
+
+      const expandLabel = 'En savoir plus';
+      const collapseLabel = 'Réduire';
       details.hidden = true;
-      button.setAttribute('aria-expanded', 'false');
       button.textContent = expandLabel;
+      button.setAttribute('aria-expanded', 'false');
+
       button.addEventListener('click', () => {
-        const expanded = button.getAttribute('aria-expanded') === 'true';
-        const nextExpanded = !expanded;
-        button.setAttribute('aria-expanded', nextExpanded ? 'true' : 'false');
-        details.hidden = !nextExpanded;
-        button.textContent = nextExpanded ? collapseLabel : expandLabel;
+        const isOpen = details.classList.toggle('project-card__details--visible');
+        if (isOpen) {
+          details.hidden = false;
+          button.textContent = collapseLabel;
+          button.setAttribute('aria-expanded', 'true');
+        } else {
+          button.textContent = expandLabel;
+          button.setAttribute('aria-expanded', 'false');
+          setTimeout(() => (details.hidden = true), 400);
+        }
       });
     });
   </script>

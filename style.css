@@ -305,7 +305,7 @@ footer {
 .languages-overlay {
   position: fixed;
   left: 50%;
-  top: 62%;
+  top: 45%;
   transform: translate(-50%, -50%) scale(0.9);
   width: min(88vw, 760px);
   padding: 1.9rem 2.2rem;
@@ -366,7 +366,7 @@ footer {
 .experience-overlay {
   position: fixed;
   left: 50%;
-  top: 64%;
+  top: 44%;
   transform: translate(-50%, -50%) scale(0.9);
   width: min(92vw, 960px);
   padding: 2.2rem 2.3rem;
@@ -387,7 +387,7 @@ footer {
 .education-overlay {
   position: fixed;
   left: 50%;
-  top: 68%;
+  top: 45%;
   transform: translate(-50%, -50%) scale(0.9);
   width: min(90vw, 860px);
   padding: 2.1rem 2.2rem;
@@ -935,4 +935,81 @@ footer {
 @keyframes hintPulse {
   0% { opacity: 0; }
   100% { opacity: 1; }
+}
+.project-card__details {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.6s ease, opacity 0.4s ease;
+}
+
+.project-card__details--visible {
+  opacity: 1;
+  max-height: 800px;
+}
+
+.project-card__toggle {
+  margin-top: 0.8rem;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.project-card__toggle:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+.projects-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.4rem;
+  align-items: start;
+}
+.project-card__details {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.6s ease, opacity 0.4s ease;
+}
+
+.project-card__details--visible {
+  opacity: 1;
+  max-height: 900px; /* افزایش دادیم تا فضای کافی باشه */
+}
+.projects-section {
+  padding-bottom: 8rem;
+  margin-bottom: 3rem;
+}
+.projects-overlay {
+  position: fixed;
+  left: 50%;
+  top: 45%;
+  transform: translate(-50%, -50%) scale(0.9);
+  width: min(92vw, 960px);
+  height: calc(100vh - 220px); /* 👈 همیشه یه ارتفاع ثابت */
+  padding: 2.2rem 2.4rem;
+  border-radius: 32px;
+  background: rgba(16, 28, 56, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 18px 44px rgba(7, 12, 34, 0.36);
+  color: #f6f9ff;
+  z-index: 2;
+  opacity: 0;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  overflow-y: scroll; /* 👈 همیشه فعال باشه */
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.25) rgba(16,28,56,0.6);
+  transition: opacity 0.35s ease, transform 0.4s ease;
+}
+
+.projects-overlay--visible {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+  pointer-events: auto;
 }
