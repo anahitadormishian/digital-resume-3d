@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Anahita 3D Resume</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap');
+
+    
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 300vh;
+      overflow-y: scroll;
+      overflow-x: hidden;
+      font-family: 'Poppins', sans-serif;
+      background: #000 url('images/space-bg.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      mix-blend-mode: screen;
+      z-index: 0;
+      opacity: 0.22;
+      will-change: opacity, transform;
+    }
+
+    body::before {
+      background-image:
+        radial-gradient(2px 2px at 20% 30%, rgba(255, 255, 255, 0.9), transparent 60%),
+        radial-gradient(2px 2px at 70% 80%, rgba(173, 216, 255, 0.85), transparent 65%),
+        radial-gradient(1.5px 1.5px at 50% 60%, rgba(255, 255, 255, 0.8), transparent 60%),
+        radial-gradient(1.5px 1.5px at 30% 80%, rgba(173, 216, 255, 0.75), transparent 60%),
+        radial-gradient(1.5px 1.5px at 80% 25%, rgba(255, 255, 255, 0.85), transparent 65%);
+      background-size: 320px 320px;
+      animation: twinkle 6.5s ease-in-out infinite alternate;
+    }
+
+    body::after {
+      background-image:
+        radial-gradient(1.5px 1.5px at 40% 40%, rgba(255, 255, 255, 0.65), transparent 60%),
+        radial-gradient(1px 1px at 75% 55%, rgba(173, 216, 255, 0.6), transparent 60%),
+        radial-gradient(1.5px 1.5px at 15% 70%, rgba(255, 255, 255, 0.7), transparent 60%),
+        radial-gradient(1px 1px at 60% 15%, rgba(255, 255, 255, 0.6), transparent 60%);
+      background-size: 260px 260px;
+      animation: drift 90s linear infinite;
+      opacity: 0.16;
+    }
+
+    #canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      z-index: 0;
+      background: transparent;
+    }
+
+    @keyframes twinkle {
+      0% { opacity: 0.18; transform: scale(1); filter: drop-shadow(0 0 2px rgba(255,255,255,0.25)); }
+      50% { opacity: 0.38; transform: scale(1.04); filter: drop-shadow(0 0 6px rgba(255,255,255,0.45)); }
+      100% { opacity: 0.22; transform: scale(1.01); filter: drop-shadow(0 0 3px rgba(173,216,255,0.35)); }
+    }
+
+    @keyframes drift {
+      0% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.12; }
+      50% { opacity: 0.22; }
+      100% { transform: translate3d(-6%, -9%, 0) scale(1.03); opacity: 0.14; }
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 1rem 2rem;
+      background: rgba(20, 20, 60, 0.5);
+      backdrop-filter: blur(10px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 2;
+    }
+
+    header .brand {
+      font-weight: bold;
+      letter-spacing: 0.1rem;
+    }
+
+    header a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 1rem;
+      font-weight: 500;
+    }
+
+    footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 0.7rem;
+      text-align: center;
+      background: rgba(20, 20, 60, 0.4);
+      backdrop-filter: blur(6px);
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.7);
+      z-index: 2;
+    }
+
+    .scroll-hint {
+      position: fixed;
+      bottom: 4.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.65rem;
+      text-align: center;
+    }
+
+    .scroll-hint__label {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.3rem;
+      letter-spacing: 0.15rem;
+      text-transform: uppercase;
+      color: #fff;
+      text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+    }
+
+    .cta-bar {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-bottom: 0.9rem;
+      flex-wrap: wrap;
+    }
+
+    .cta-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.65rem 1.4rem;
+      border-radius: 999px;
+      border: none;
+      background: #5f6dff;
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.92rem;
+      text-decoration: none;
+      box-shadow: 0 8px 20px rgba(95, 109, 255, 0.35);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+    }
+
+    .cta-primary span {
+      font-size: 0.95rem;
+    }
+
+    .cta-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px rgba(95, 109, 255, 0.4);
+      opacity: 0.92;
+    }
+
+    .cta-links {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .cta-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.5rem 0.95rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 0.85rem;
+      text-decoration: none;
+      background: rgba(10, 15, 35, 0.65);
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .cta-link:hover {
+      transform: translateY(-1px);
+      opacity: 0.85;
+    }
+
+    .cta-link span {
+      font-size: 0.92rem;
+    }
+
+    .hint-tooltip {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -120%);
+      display: inline-flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      padding: 0.75rem 1rem;
+      border-radius: 12px;
+      background: rgba(10, 10, 10, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      z-index: 3;
+      width: clamp(220px, 25vw, 320px);
+    }
+
+    .tooltip-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.25rem;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .tooltip-text {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: #fff;
+    }
+
+    .bio-card {
+      position: fixed;
+      left: 50%;
+      top: 54%;
+      transform: translate(-50%, -50%) scale(0.95);
+      width: min(92vw, 680px);
+      padding: 2.3rem 2.6rem;
+      border-radius: 22px;
+      background: #111a33;
+      box-shadow: 0 14px 30px rgba(7, 12, 34, 0.26);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #f9fbff;
+      z-index: 2;
+      opacity: 0;
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      transition: opacity 0.35s ease, transform 0.4s ease;
+    }
+
+    .bio-card--visible {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+      pointer-events: auto;
+    }
+
+    .bio-card__eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.3rem;
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.65);
+    }
+
+    .bio-card h2 {
+      margin: 0;
+      font-size: clamp(2rem, 3vw, 2.35rem);
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    .bio-card__subtitle {
+      margin: 0;
+      font-size: 2rem;
+      color: rgba(255, 255, 255, 0.78);
+    }
+
+    .bio-card p {
+      margin: 0;
+      line-height: 1.65;
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.88);
+    }
+
+    .bio-card__note {
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.78);
+    }
+
+    .bio-card__note strong {
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.92);
+    }
+
+    .skills-overlay {
+      position: fixed;
+      left: 50%;
+      top: 58%;
+      transform: translate(-50%, -50%) scale(0.9);
+      width: min(92vw, 980px);
+      padding: 2.1rem 2.4rem 6rem;
+      border-radius: 28px;
+      background: #101a34;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 16px 32px rgba(7, 12, 32, 0.28);
+      color: #f8fbff;
+      z-index: 2;
+      opacity: 0;
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.8rem;
+      transition: opacity 0.35s ease, transform 0.4s ease;
+      max-height: calc(100vh - 170px);
+      overflow-y: auto;
+      scrollbar-width: thin;
+    }
+
+    .skills-overlay--visible {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+      pointer-events: auto;
+    }
+
+    .skills-overlay__title {
+      margin: 0;
+      text-align: center;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.68);
+    }
+
+    .skills-overlay__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.4rem;
+    }
+
+    .skills-card {
+      padding: 1.8rem 1.5rem;
+      border-radius: 20px;
+      background: #161f3a;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 10px 22px rgba(6, 10, 28, 0.28);
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+    }
+
+    .skills-card h3 {
+      margin: 0;
+      font-size: 1.18rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+    }
+
+    .skills-card__list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+
+    .skill-item__label {
+      display: block;
+      font-weight: 600;
+      font-size: 1.05rem;
+    }
+
+    .skill-item__detail {
+      display: block;
+      margin-top: 0.2rem;
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.72);
+      letter-spacing: 0.01em;
+    }
+
+    .skill-item__details {
+      margin: 0.35rem 0 0;
+      padding-left: 1.1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      list-style: disc;
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 0.88rem;
+      line-height: 1.45;
+    }
+    
+    .skills-overlay::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .skills-overlay::-webkit-scrollbar-track {
+      background: rgba(15, 22, 46, 0.6);
+      border-radius: 999px;
+    }
+
+    .skills-overlay::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 999px;
+    }
+
+    .skills-case-studies {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 1.4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .skills-case-studies h3 {
+      margin: 0;
+      font-size: 1.05rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.75);
+    }
+
+    .skills-case-studies ul {
+      margin: 0;
+      padding-left: 1.1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 0.92rem;
+      line-height: 1.55;
+    }
+
+    .skills-case-studies strong {
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .projects-overlay {
+      position: fixed;
+      left: 50%;
+      top: 66%;
+      transform: translate(-50%, -50%) scale(0.9);
+      width: min(92vw, 960px);
+      padding: 2.2rem 2.4rem;
+      border-radius: 32px;
+      background: rgba(16, 28, 56, 0.96);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 18px 44px rgba(7, 12, 34, 0.36);
+      color: #f6f9ff;
+      z-index: 2;
+      opacity: 0;
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.6rem;
+      transition: opacity 0.35s ease, transform 0.4s ease;
+      max-height: calc(100vh - 170px);
+      overflow-y: auto;
+      scrollbar-width: thin;
+    }
+
+    .projects-overlay--visible {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+      pointer-events: auto;
+    }
+
+    .projects-overlay::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .projects-overlay::-webkit-scrollbar-track {
+      background: rgba(15, 24, 50, 0.6);
+      border-radius: 999px;
+    }
+
+    .projects-overlay::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.18);
+      border-radius: 999px;
+    }
+
+    .projects-overlay__title {
+      margin: 0;
+      text-align: center;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.72);
+    }
+
+    .projects-overlay__intro {
+      margin: 0;
+      text-align: center;
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 0.94rem;
+      line-height: 1.6;
+    }
+
+    .projects-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.4rem;
+    }
+
+    .project-card {
+      padding: 1.6rem 1.4rem;
+      border-radius: 22px;
+      background: #172340;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 12px 24px rgba(6, 10, 30, 0.28);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .project-card__header {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .project-card__title {
+      margin: 0;
+      font-size: 1.18rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+    }
+
+    .project-card__subtitle {
+      margin: 0;
+      font-size: 0.9rem;
+      letter-spacing: 0.04em;
+      color: rgba(255, 255, 255, 0.7);
+      text-transform: uppercase;
+    }
+
+    .project-card__summary {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.82);
+      font-size: 0.92rem;
+      line-height: 1.45;
+    }
+
+    .project-card__tech {
+      margin: 0;
+      font-size: 0.86rem;
+      color: rgba(255, 255, 255, 0.72);
+    }
+
+    .project-card__toggle {
+      align-self: flex-start;
+      padding: 0.45rem 0.95rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      background: transparent;
+      color: rgba(255, 255, 255, 0.88);
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .project-card__toggle:hover {
+      transform: translateY(-1px);
+      opacity: 0.85;
+    }
+
+    .project-card__toggle:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(123, 167, 255, 0.35);
+    }
+
+    .project-card__details {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.82);
+      line-height: 1.55;
+    }
+
+    .project-card__details a {
+      color: rgba(123, 167, 255, 0.9);
+      text-decoration: underline;
+    }
+
+    .project-card__details p {
+      margin: 0;
+    }
+
+    .languages-overlay {
+      position: fixed;
+      left: 50%;
+      top: 62%;
+      transform: translate(-50%, -50%) scale(0.9);
+      width: min(88vw, 760px);
+      padding: 1.9rem 2.1rem;
+      border-radius: 26px;
+      background: #101c38;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 14px 28px rgba(7, 12, 30, 0.28);
+      color: #f9fbff;
+      z-index: 2;
+      opacity: 0;
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.4rem;
+      transition: opacity 0.35s ease, transform 0.4s ease;
+    }
+
+    .languages-overlay--visible {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+      pointer-events: auto;
+    }
+
+    .languages-overlay__title {
+      margin: 0;
+      text-align: center;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .languages-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.2rem;
+    }
+
+    .language-card {
+      padding: 1.2rem 1rem;
+      border-radius: 18px;
+      background: #172342;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 10px 20px rgba(6, 10, 28, 0.24);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .language-card__name {
+      margin: 0;
+      font-size: 1.2rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .language-card__level {
+      margin: 0;
+      font-size: 0.95rem;
+      color: rgba(255, 218, 120, 0.95);
+      font-weight: 600;
+      letter-spacing: 0.03em;
+    }
+
+    .language-card__note {
+      margin: 0;
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.68);
+      letter-spacing: 0.02em;
+    }
+
+    .experience-overlay {
+      position: fixed;
+      left: 50%;
+      top: 64%;
+      transform: translate(-50%, -50%) scale(0.9);
+      width: min(92vw, 960px);
+      padding: 2.2rem 2.3rem;
+      border-radius: 30px;
+      background: #101936;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 16px 32px rgba(7, 12, 32, 0.28);
+      color: #f6f8ff;
+      z-index: 2;
+      opacity: 0;
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.6rem;
+      transition: opacity 0.35s ease, transform 0.4s ease;
+    }
+
+    .experience-overlay--visible {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+      pointer-events: auto;
+    }
+
+    .experience-overlay__title {
+      margin: 0;
+      text-align: center;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .experience-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.3rem;
+    }
+
+    .experience-card {
+      padding: 1.5rem 1.3rem;
+      border-radius: 22px;
+      background: #172340;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 12px 24px rgba(6, 10, 30, 0.28);
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .experience-card__header {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .experience-card__period {
+      font-size: 0.86rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: rgba(255, 255, 255, 0.72);
+      text-transform: uppercase;
+    }
+
+    .experience-card__role {
+      margin: 0;
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    .experience-card__org {
+      margin: 0;
+      font-size: 0.94rem;
+      color: rgba(255, 255, 255, 0.75);
+    }
+
+    .experience-card__tasks {
+      margin: 0;
+      padding-left: 1.1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      list-style: disc;
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 0.86rem;
+      line-height: 1.45;
+    }
+
+    @media (max-width: 680px) {
+      .cta-bar {
+        flex-direction: column;
+        gap: 0.6rem;
+      }
+
+      .cta-links {
+        width: 100%;
+      }
+
+      .bio-card {
+        top: auto;
+        bottom: 7rem;
+        transform: translate(-50%, 0) scale(0.92);
+        padding: 1.5rem 1.6rem;
+        width: calc(100vw - 2.5rem);
+      }
+
+      .bio-card--visible {
+        transform: translate(-50%, 0) scale(1);
+      }
+
+      .skills-overlay {
+        top: auto;
+        bottom: 6.6rem;
+        transform: translate(-50%, 0) scale(0.92);
+        width: calc(100vw - 2.5rem);
+        padding: 1.7rem 1.4rem;
+        gap: 1.3rem;
+      }
+
+      .skills-overlay--visible {
+        transform: translate(-50%, 0) scale(1);
+      }
+
+      .skills-overlay__grid {
+        grid-template-columns: 1fr;
+      }
+
+      .languages-overlay {
+        top: auto;
+        bottom: 5.8rem;
+        transform: translate(-50%, 0) scale(0.92);
+        width: calc(100vw - 2.5rem);
+        padding: 1.6rem 1.3rem;
+        gap: 1.1rem;
+      }
+
+      .languages-overlay--visible {
+        transform: translate(-50%, 0) scale(1);
+      }
+
+      .languages-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .projects-overlay {
+        top: auto;
+        bottom: 4.8rem;
+        transform: translate(-50%, 0) scale(0.92);
+        width: calc(100vw - 2.5rem);
+        padding: 2rem 1.6rem;
+        max-height: calc(100vh - 200px);
+      }
+
+      .projects-overlay--visible {
+        transform: translate(-50%, 0) scale(1);
+      }
+
+      .projects-list {
+        grid-template-columns: 1fr;
+      }
+
+      .experience-overlay {
+        top: auto;
+        bottom: 5rem;
+        transform: translate(-50%, 0) scale(0.9);
+        width: calc(100vw - 2.5rem);
+        padding: 1.8rem 1.4rem;
+        gap: 1.4rem;
+      }
+
+      .experience-overlay--visible {
+        transform: translate(-50%, 0) scale(1);
+      }
+
+      .experience-list {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (min-width: 681px) and (max-width: 1024px) {
+      .skills-overlay__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .languages-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .experience-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+
+  <header>
+    <div class="brand">Anahita Dormishian</div>
+    <nav>
+      <a href="#bio-card" data-scroll-progress="0.26">Profil</a>
+      <a href="#skills-cards" data-scroll-progress="0.36">Compétences</a>
+      <a href="#languages-cards" data-scroll-progress="0.46">Langues</a>
+      <a href="#experience-cards" data-scroll-progress="0.78">Expérience</a>
+      <a href="#education-cards" data-scroll-progress="0.9">Formations</a>
+      <a href="#projects-cards" data-scroll-progress="1">Projets</a>
+    </nav>
+  </header>
+
+  <div class="scroll-hint">
+    <div class="cta-bar" aria-label="Primary actions">
+      <a class="cta-primary" href="assets/Anahita-Dormishian-CV.pdf" download>
+        <span>⬇️</span>
+        <span>Download CV</span>
+      </a>
+      <div class="cta-links">
+        <a class="cta-link" href="https://github.com/anahitadormishian" target="_blank" rel="noopener noreferrer">
+          <span>🐙</span>
+          <span>GitHub</span>
+        </a>
+        <a class="cta-link" href="https://www.linkedin.com/in/anahita-dormishian-0b4b2b171" target="_blank" rel="noopener noreferrer">
+          <span>🔗</span>
+          <span>LinkedIn</span>
+        </a>
+        <a class="cta-link" href="mailto:anahitadormishian@gmail.com">
+          <span>📧</span>
+          <span>Email</span>
+        </a>
+      </div>
+    </div>
+    <span class="scroll-hint__label">scroll or use keys</span>
+    <div id="tooltip" class="hint-tooltip" role="tooltip">
+      <span class="tooltip-label">Hint</span>
+      <span class="tooltip-text">Scroll to zoom the scene</span>
+    </div>
+  </div>
+
+  <article id="bio-card" class="bio-card" aria-hidden="true">
+    <span class="bio-card__eyebrow">Profil</span>
+    <h2>Anahita Dormishian</h2>
+    <p class="bio-card__subtitle">Ingénieure biomédicale & étudiante en informatique</p>
+    <p>À la recherche d’une alternance en Intelligence Artificielle.</p>
+    <p>Diplômée en génie biomédical, j’ai découvert ma passion pour la programmation en travaillant sur des projets liant technologie et santé.</p>
+    <p>J’ai participé à la conception d’outils web et de dispositifs médicaux, transformant des besoins métiers en solutions fonctionnelles et mesurables.</p>
+    <p>Actuellement en Pré-Master Informatique à EPITECH Strasbourg, je me spécialise en intelligence artificielle afin de combiner mes compétences techniques avec mon sens de l’analyse et de la conception.</p>
+    <p class="bio-card__note"><strong>Organisation du portfolio :</strong> Ce portfolio présente d’abord mon profil, puis mes compétences illustrées par des projets concrets, avant de détailler mes expériences professionnelles et ma formation, pour montrer une évolution cohérente vers les métiers de l’IA et de la Data.</p>
+    <p class="bio-card__note"><strong>Choix UI/UX :</strong> La palette bleu nuit crée une identité technologique et élégante. Les cartes planes et la typographie Orbitron renforcent la clarté et la modernité, tandis que l’avatar 3D apporte une touche humaine à l’accueil. Les boutons d’appel à l’action (CTA) centrés facilitent la navigation et la prise de contact.</p>
+  </article>
+
+  <section id="skills-cards" class="skills-overlay" aria-hidden="true">
+    <h2 class="skills-overlay__title">Compétences</h2>
+    <div class="skills-overlay__grid">
+      <article class="skills-card">
+        <h3>Informatique &amp; Développement</h3>
+        <ul class="skills-card__list">
+          <li>
+            <span class="skill-item__label">Python</span>
+            <ul class="skill-item__details">
+              <li>Développement d’applications orientées objet et scripts d’analyse.</li>
+              <li>Création du prototype de jeu “ItOn” combinant IA, logique de jeu et interactions utilisateur.</li>
+              <li>Participation à la piscine Python d’EPITECH avec des exercices d’automatisation et d’algorithmes avancés.</li>
+            </ul>
+          </li>
+          <li>
+            <span class="skill-item__label">C / C++</span>
+            <ul class="skill-item__details">
+              <li>Mise en œuvre de programmes structurés et de logique temps réel pour la gestion de capteurs et d’événements.</li>
+              <li>Expérience en algorithmique et optimisation dans les projets du module T-PRE-500.</li>
+            </ul>
+          </li>
+          <li>
+            <span class="skill-item__label">Java</span>
+            <ul class="skill-item__details">
+              <li>Maîtrise des principes de l’OOP (héritage, polymorphisme, classes abstraites).</li>
+              <li>Conception de classes de simulation (Gecko, Mars, Astronaut) dans la piscine Java d’EPITECH.</li>
+            </ul>
+          </li>
+          <li>
+            <span class="skill-item__label">Développement Web</span>
+            <ul class="skill-item__details">
+              <li>Développement complet du projet “Job Board” (API REST, JWT, PDO, MariaDB).</li>
+              <li>Création de sites web pour l’entreprise Dorreh Sanat (produits, contacts, interface d’administration).</li>
+              <li>Conception front-end moderne avec Materialize et intégration MySQL.</li>
+            </ul>
+          </li>
+          <li>
+            <span class="skill-item__label">UI / UX Design</span>
+            <ul class="skill-item__details">
+              <li>Conception de maquettes et wireframes sur Figma.</li>
+              <li>Création du portfolio personnel “Anahita Dormishian” : design responsive, palette bleu nuit, typographie Montserrat.</li>
+            </ul>
+          </li>
+          <li>
+            <span class="skill-item__label">Linux &amp; Administration système</span>
+            <ul class="skill-item__details">
+              <li>Utilisation quotidienne d’Ubuntu pour le développement et la configuration d’environnements Apache/MariaDB.</li>
+              <li>Scripts Bash pour l’automatisation et la gestion des services.</li>
+            </ul>
+          </li>
+          <li>
+            <span class="skill-item__label">Git / GitHub</span>
+            <ul class="skill-item__details">
+              <li>Gestion rigoureuse du versionnage : branches, commits, README, variables d’environnement.</li>
+              <li>Hébergement et documentation de projets académiques et personnels (Job Board, Portfolio 3D, ItOn).</li>
+            </ul>
+          </li>
+        </ul>
+      </article>
+
+      <article class="skills-card">
+        <h3>Logiciels &amp; Outils</h3>
+        <ul class="skills-card__list">
+          <li>
+            <span class="skill-item__label">Figma</span>
+            <ul class="skill-item__details">
+              <li>Conception de maquettes et prototypes pour interfaces web et portfolios.</li>
+              <li>Tests A/B et optimisation du parcours utilisateur pour des sites modernes.</li>
+            </ul>
+          </li>
+          <li>
+            <span class="skill-item__label">Adobe Photoshop</span>
+            <ul class="skill-item__details">
+              <li>Création de visuels, retouches et bannières pour sites web et réseaux sociaux.</li>
+              <li>Mise en page harmonieuse de sections visuelles pour renforcer l’identité du site.</li>
+            </ul>
+          </li>
+          <li>
+            <span class="skill-item__label">Adobe Illustrator</span>
+            <ul class="skill-item__details">
+              <li>Conception d’éléments graphiques vectoriels (logos, icônes, illustrations) pour l’intégration web.</li>
+            </ul>
+          </li>
+          <li>
+            <span class="skill-item__label">Adobe XD</span>
+            <ul class="skill-item__details">
+              <li>Prototypage et présentation interactive des pages web avant intégration front-end.</li>
+            </ul>
+          </li>
+          <li>
+            <span class="skill-item__label">SketchUp</span>
+            <ul class="skill-item__details">
+              <li>Création de compositions 3D ou visuels conceptuels pour enrichir le contenu digital.</li>
+            </ul>
+          </li>
+          <li>
+            <span class="skill-item__label">MS Office / PowerPoint</span>
+            <ul class="skill-item__details">
+              <li>Production de présentations et tableaux de bord visuels pour communiquer les projets.</li>
+            </ul>
+          </li>
+        </ul>
+      </article>
+
+      <article class="skills-card">
+        <h3>Électronique &amp; Biomédical</h3>
+        <ul class="skills-card__list">
+          <li>
+            <span class="skill-item__label">Maintenance &amp; diagnostic technique</span>
+            <ul class="skill-item__details">
+              <li>Réparation et dépannage d’équipements biomédicaux (alimentation, capteurs, circuits).</li>
+              <li>Identification et correction de défaillances techniques sur des dispositifs médicaux complexes.</li>
+            </ul>
+          </li>
+          <li>
+            <span class="skill-item__label">Électronique &amp; calibration</span>
+            <ul class="skill-item__details">
+              <li>Conception et calibration de circuits pour capteurs biomédicaux avec amélioration de la précision.</li>
+              <li>Optimisation de la stabilité et réduction du bruit de signal sur les cartes électroniques.</li>
+            </ul>
+          </li>
+          <li>
+            <span class="skill-item__label">Programmation d’appareils médicaux</span>
+            <ul class="skill-item__details">
+              <li>Programmation et configuration de dispositifs (lasers, modules de contrôle, systèmes embarqués).</li>
+              <li>Validation de séquences sécurisées et tests de fonctionnement avant mise en service.</li>
+            </ul>
+          </li>
+          <li>
+            <span class="skill-item__label">Instrumentation &amp; traçabilité numérique</span>
+            <ul class="skill-item__details">
+              <li>Création de check-lists numériques connectées à une base Python pour le suivi des interventions et de la maintenance préventive.</li>
+            </ul>
+          </li>
+          <li>
+            <span class="skill-item__label">Production &amp; assemblage</span>
+            <ul class="skill-item__details">
+              <li>Participation à la fabrication et à l’intégration d’appareils biomédicaux en lien avec les équipes R&amp;D et qualité.</li>
+            </ul>
+          </li>
+        </ul>
+      </article>
+    </div>
+    <div class="skills-case-studies">
+      <h3>Cas pratiques</h3>
+      <ul>
+        <li><strong>Vision Laser&nbsp;:</strong> intégration d’un pipeline Python + Three.js pour visualiser l’alignement des faisceaux et réduire les recalibrages de 30&nbsp;%.</li>
+        <li><strong>Dashboard maintenance&nbsp;:</strong> consolidation des données de 5 équipements biomédicaux dans un tableau de bord interactif (Excel + Power Query) utilisé par la direction.</li>
+        <li><strong>Assistant clinique&nbsp;:</strong> conception d’une interface Figma testée auprès des soignants, puis implémentée en React pour suivre les incidents quotidiens.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="languages-cards" class="languages-overlay" aria-hidden="true">
+    <h2 class="languages-overlay__title">Langues</h2>
+    <div class="languages-grid">
+      <article class="language-card">
+        <h3 class="language-card__name"><span role="img" aria-label="French flag">🇫🇷</span>Français</h3>
+        <p class="language-card__level">B1 - B2</p>
+        
+      </article>
+      <article class="language-card">
+        <h3 class="language-card__name"><span role="img" aria-label="United Kingdom flag">🇬🇧</span>Anglais</h3>
+        <p class="language-card__level">B2</p>
+       
+      </article>
+      <article class="language-card">
+        <h3 class="language-card__name"><span role="img" aria-label="Iran flag">🇮🇷</span>Persan</h3>
+        <p class="language-card__level">Langue maternelle</p>
+        
+      </article>
+    </div>
+  </section>
+
+  <section id="experience-cards" class="experience-overlay" aria-hidden="true">
+    <h2 class="experience-overlay__title">🇫🇷 Expériences professionnelles</h2>
+    <div class="experience-list">
+      <article class="experience-card">
+        <div class="experience-card__header">
+          <span class="experience-card__period">2019 – 2021</span>
+          <h3 class="experience-card__role">Ingénieure R&amp;D</h3>
+          <p class="experience-card__org">Dorreh Sanat Company – Département Recherche &amp; Développement</p>
+        </div>
+        <ul class="experience-card__tasks">
+          <li>Spécialisée dans l’entretien et la réparation des dispositifs médicaux au laser.</li>
+          <li>Programmation et calibration des appareils de traitement et de rajeunissement de la peau.</li>
+          <li>Participation à la conception électronique et à la validation technique des dispositifs.</li>
+        </ul>
+      </article>
+      <article class="experience-card">
+        <div class="experience-card__header">
+          <span class="experience-card__period">2019 – 2021</span>
+          <h3 class="experience-card__role">Responsable du département de publicité</h3>
+          <p class="experience-card__org">Dorreh Sanat Company</p>
+        </div>
+        <ul class="experience-card__tasks">
+          <li>Gestion et création de campagnes publicitaires pour promouvoir les produits médicaux et technologiques.</li>
+          <li>Conception de supports visuels (affiches, brochures, contenus digitaux) en collaboration avec l’équipe marketing.</li>
+          <li>Développement de stratégies de communication sur les réseaux sociaux et suivi des performances.</li>
+        </ul>
+      </article>
+      <article class="experience-card">
+        <div class="experience-card__header">
+          <span class="experience-card__period">2017 – 2018</span>
+          <h3 class="experience-card__role">Opératrice de dispositifs médicaux au laser</h3>
+          <p class="experience-card__org">Yalda Clinic (Hôpital Imam Khomeini)</p>
+        </div>
+        <ul class="experience-card__tasks">
+          <li>Utilisation de dispositifs laser pour traitements esthétiques et dermatologiques.</li>
+          <li>Paramétrage des appareils et suivi des protocoles de sécurité.</li>
+          <li>Collaboration avec les praticiens pour adapter les traitements selon le type de peau et les besoins du patient.</li>
+        </ul>
+      </article>
+      <article class="experience-card">
+        <div class="experience-card__header">
+          <span class="experience-card__period">2017 – 2018</span>
+          <h3 class="experience-card__role">Technicienne en équipements médicaux</h3>
+          <p class="experience-card__org">Yalda Clinic (Hôpital Imam Khomeini)</p>
+        </div>
+        <ul class="experience-card__tasks">
+          <li>Maintenance et calibration des dispositifs médicaux.</li>
+          <li>Assistance technique auprès des médecins et contrôle qualité des équipements.</li>
+          <li>Participation à la gestion du matériel stérile et à la traçabilité des interventions.</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section id="education-cards" class="education-overlay" aria-hidden="true">
+    <h2 class="education-overlay__title">Formations</h2>
+    <div class="education-list">
+      <article class="education-card">
+        <h3 class="education-card__school">EPITECH Strasbourg</h3>
+        <span class="education-card__period">2025 – 2026</span>
+        <p class="education-card__program">Pré-Master en Informatique, orientation future MSc Intelligence Artificielle (2026 – 2028) avec acquisition de compétences en HTML, CSS, PHP, Java, Linux, administration systèmes &amp; réseaux, gestion de serveur et développement web &amp; logiciel.</p>
+      </article>
+      <article class="education-card">
+        <h3 class="education-card__school">Université Azad, Téhéran</h3>
+        <span class="education-card__period">2015 – 2019</span>
+        <p class="education-card__program">Licence en Génie Biomédical (équivalence Bac+3 reconnue ENIC-NARIC France).</p>
+      </article>
+      <article class="education-card">
+        <h3 class="education-card__school">Complexe Fanni Tehran</h3>
+        <span class="education-card__period">2024 – 2025</span>
+        <p class="education-card__program">Certificat UI/UX Design&nbsp;: design system, prototypage Figma, tests utilisateurs.</p>
+      </article>
+      <article class="education-card">
+        <h3 class="education-card__school">Université de Strasbourg IIEF</h3>
+        <span class="education-card__period">2022 – 2024</span>
+        <p class="education-card__program">Cours de langue français </p>
+      </article>
+    </div>
+  </section>
+
+  <section id="projects-cards" class="projects-overlay" aria-hidden="true">
+    <h2 class="projects-overlay__title">Bienvenue sur mes projets</h2>
+    <p class="projects-overlay__intro">Découvrez une sélection de projets mettant en avant mon profil full-stack, mon intérêt pour l’IA et mon sens du design.</p>
+    <div class="projects-list">
+      <article class="project-card" data-project-card>
+        <header class="project-card__header">
+          <h3 class="project-card__title">🧠 Job Board</h3>
+          <p class="project-card__subtitle">EPITECH – 2025</p>
+          <p class="project-card__summary">Plateforme reliant étudiants et entreprises pour publier et suivre des offres d’emploi.</p>
+          <p class="project-card__tech"><strong>Technologies&nbsp;:</strong> PHP, MariaDB, JavaScript, Materialize, REST API, JWT</p>
+        </header>
+        <button class="project-card__toggle" type="button" data-project-toggle data-expand-label="En savoir plus" data-collapse-label="Réduire">En savoir plus</button>
+        <div class="project-card__details" data-project-details hidden>
+          <p><strong>Description&nbsp;:</strong> Plateforme web sécurisée permettant aux entreprises de publier des offres, aux étudiants de candidater et à l’administrateur de suivre l’activité.</p>
+          <p><strong>Rôle&nbsp;:</strong> Développement du backend (API REST sécurisée, base MariaDB, gestion des JWT) et conception du frontend dynamique avec Materialize.</p>
+          <p><strong>Résultat&nbsp;:</strong> Application 100&nbsp;% fonctionnelle constituant une base solide pour une mise en ligne future.</p>
+          <p><strong>Compétences&nbsp;:</strong> Architecture REST, sécurité JWT, intégration frontend-backend, SQL, responsive design.</p>
+          <p><strong>Lien&nbsp;:</strong> <a href="https://github.com/anahitadormishian/job-board" target="_blank" rel="noopener noreferrer">GitHub – Job Board</a></p>
+        </div>
+      </article>
+
+      <article class="project-card" data-project-card>
+        <header class="project-card__header">
+          <h3 class="project-card__title">🎮 ItOn – Simulation Game</h3>
+          <p class="project-card__subtitle">Python – 2025</p>
+          <p class="project-card__summary">Prototype de mini-jeu stratégique mêlant IA, gestion d’événements et programmation orientée objet.</p>
+          <p class="project-card__tech"><strong>Technologies&nbsp;:</strong> Python (OOP, logique de jeu)</p>
+        </header>
+        <button class="project-card__toggle" type="button" data-project-toggle data-expand-label="En savoir plus" data-collapse-label="Réduire">En savoir plus</button>
+        <div class="project-card__details" data-project-details hidden>
+          <p><strong>Description&nbsp;:</strong> Prototype de jeu de simulation combinant intelligence artificielle, gestion des entités et évènements.</p>
+          <p><strong>Rôle&nbsp;:</strong> Conception de la logique principale, structuration des classes (héritage, interactions) et gestion de l’état du jeu.</p>
+          <p><strong>Compétences&nbsp;:</strong> Algorithmique, programmation orientée objet, modélisation de comportements, architecture logicielle.</p>
+        </div>
+      </article>
+
+      <article class="project-card" data-project-card>
+        <header class="project-card__header">
+          <h3 class="project-card__title">🔬 Vision Laser</h3>
+          <p class="project-card__subtitle">Dorreh Sanat – 2020</p>
+          <p class="project-card__summary">Outil interne de visualisation 3D pour vérifier l’alignement des faisceaux laser.</p>
+          <p class="project-card__tech"><strong>Technologies&nbsp;:</strong> Python, Three.js, Excel</p>
+        </header>
+        <button class="project-card__toggle" type="button" data-project-toggle data-expand-label="En savoir plus" data-collapse-label="Réduire">En savoir plus</button>
+        <div class="project-card__details" data-project-details hidden>
+          <p><strong>Description&nbsp;:</strong> Outil de visualisation pour contrôler en 3D l’alignement des faisceaux et anticiper les recalibrages.</p>
+          <p><strong>Rôle&nbsp;:</strong> Création du script Python automatisant les calculs et intégration du modèle 3D via Three.js.</p>
+          <p><strong>Résultat&nbsp;:</strong> Réduction de 30&nbsp;% des recalibrages et gain de temps pour les équipes R&amp;D.</p>
+          <p><strong>Compétences&nbsp;:</strong> Traitement de données, visualisation 3D, automatisation, analyse R&amp;D.</p>
+        </div>
+      </article>
+
+      <article class="project-card" data-project-card>
+        <header class="project-card__header">
+          <h3 class="project-card__title">🌐 Portfolio – Site personnel</h3>
+          <p class="project-card__subtitle">EPITECH – 2025</p>
+          <p class="project-card__summary">Site web personnel pour présenter compétences, projets et parcours professionnel.</p>
+          <p class="project-card__tech"><strong>Technologies&nbsp;:</strong> HTML, CSS, JavaScript, Materialize, Figma</p>
+        </header>
+        <button class="project-card__toggle" type="button" data-project-toggle data-expand-label="En savoir plus" data-collapse-label="Réduire">En savoir plus</button>
+        <div class="project-card__details" data-project-details hidden>
+          <p><strong>Description&nbsp;:</strong> Conception d’un site responsive avec sections dynamiques pour les compétences, projets et la prise de contact.</p>
+          <p><strong>Rôle&nbsp;:</strong> Design complet sur Figma, intégration front-end, optimisation de l’expérience utilisateur.</p>
+          <p><strong>Compétences&nbsp;:</strong> Responsive design, UI/UX, intégration front-end, structure SEO.</p>
+        </div>
+      </article>
+
+      <article class="project-card" data-project-card>
+        <header class="project-card__header">
+          
+          
+        </header>
+        <button class="project-card__toggle" type="button" data-project-toggle data-expand-label="En savoir plus" data-collapse-label="Réduire">En savoir plus</button>
+        <div class="project-card__details" data-project-details hidden>
+          <p><strong>Description&nbsp;:</strong> Développement de sites vitrine complets pour promouvoir les dispositifs médicaux.</p>
+          <p><strong>Rôle&nbsp;:</strong> Design du front-end, création des pages d’administration et gestion du contenu.</p>
+          <p><strong>Compétences&nbsp;:</strong> Design web, bases de données, UX pour utilisateurs non techniques.</p>
+        </div>
+      </article>
+
+      <article class="project-card" data-project-card>
+        
+        <button class="project-card__toggle" type="button" data-project-toggle data-expand-label="En savoir plus" data-collapse-label="Réduire">En savoir plus</button>
+        <div class="project-card__details" data-project-details hidden>
+          <p><strong>Description&nbsp;:</strong> Logo typographique persan combinant tradition et modernité pour représenter une identité culturelle forte.</p>
+          <p><strong>Compétences&nbsp;:</strong> Direction artistique, typographie, storytelling visuel.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <footer>© 2025 Anahita Dormishian</footer>
+
+  <!-- Three.js core (UMD build) and add-ons expose globals under window.THREE -->
+  <script src="https://unpkg.com/three@0.128.0/build/three.min.js"></script>
+  <script src="https://unpkg.com/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  <script src="https://unpkg.com/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+  <script src="https://unpkg.com/three@0.128.0/examples/js/loaders/FontLoader.js"></script>
+  <script src="https://unpkg.com/three@0.128.0/examples/js/geometries/TextGeometry.js"></script>
+
+  <!-- ماژول اصلی که از سه بعدی استفاده می‌کند -->
+  <script type="module" src="js/main.js"></script>
+    <script type="module">
+    const projectCards = document.querySelectorAll('[data-project-card]');
+    projectCards.forEach((card, index) => {
+      const button = card.querySelector('[data-project-toggle]');
+      const details = card.querySelector('[data-project-details]');
+      if (!button || !details) {
+        return;
+      }
+      const expandLabel = button.dataset.expandLabel ?? 'En savoir plus';
+      const collapseLabel = button.dataset.collapseLabel ?? 'Réduire';
+      if (!details.id) {
+        details.id = `project-details-${index}`;
+      }
+      button.setAttribute('aria-controls', details.id);
+      details.hidden = true;
+      button.setAttribute('aria-expanded', 'false');
+      button.textContent = expandLabel;
+      button.addEventListener('click', () => {
+        const expanded = button.getAttribute('aria-expanded') === 'true';
+        const nextExpanded = !expanded;
+        button.setAttribute('aria-expanded', nextExpanded ? 'true' : 'false');
+        details.hidden = !nextExpanded;
+        button.textContent = nextExpanded ? collapseLabel : expandLabel;
+      });
+    });
+  </script>
+  <div style="height:200vh; width:100%; background:transparent;"></div>
+
+</body>
+</html>
