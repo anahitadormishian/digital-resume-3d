@@ -946,3 +946,75 @@ footer {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+/* ============================================================
+   🌙 MOBILE OPTIMIZATION (for screens up to 680px wide)
+   These styles refine spacing, readability and layout on phones
+   ============================================================ */
+
+@media (max-width: 680px) {
+
+  /* 🧭 Header navigation becomes vertical and readable */
+  header {
+    flex-direction: column; /* stack links vertically */
+    align-items: flex-start;
+    padding: 0.8rem 1.2rem;
+    gap: 0.4rem; /* add space between name and links */
+  }
+
+  header a {
+    font-size: 0.9rem; /* smaller text for compact layout */
+    margin: 0.25rem 0;
+  }
+
+  /* 🪪 Bio section: less padding and smoother text flow */
+  .bio-card {
+    padding: 1.4rem 1rem;
+    width: calc(100vw - 2rem);
+  }
+
+  .bio-card p {
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
+
+  /* 🌍 Language cards: keep proportions and spacing consistent */
+  .languages-grid {
+    gap: 0.8rem;
+    grid-template-columns: 1fr; /* one column for better readability */
+  }
+
+  .language-card {
+    padding: 1rem 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  /* ⚙️ Project cards: reduce padding slightly for smaller screens */
+  .project-card {
+    padding: 1.2rem 1rem;
+  }
+
+  .project-card__title {
+    font-size: 1.05rem;
+  }
+
+  /* 📜 Footer: smaller text, add padding to avoid overlap with phone UI */
+  footer {
+    font-size: 0.8rem;
+    padding-bottom: 1rem;
+  }
+
+  /* 🚫 Hide "SCROLL OR USE KEYS" text on mobile */
+  .scroll-hint {
+    display: none;
+  }
+
+  /* 🪄 Optional: add slight fade animation when switching overlays */
+  .bio-card,
+  .skills-overlay,
+  .languages-overlay,
+  .projects-overlay,
+  .experience-overlay,
+  .education-overlay {
+    transition: opacity 0.3s ease, transform 0.35s ease;
+  }
+}
