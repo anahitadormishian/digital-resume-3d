@@ -912,3 +912,74 @@ footer {
     transition: opacity 0.3s ease, transform 0.35s ease;
   }
 }
+/* ============================================================
+   🍔 HAMBURGER MENU - Only active for screens <= 680px
+   ============================================================ */
+@media (max-width: 680px) {
+  /* دکمه همبرگر */
+  .menu-toggle {
+    display: block;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: #fff;
+    position: absolute;
+    right: 1.5rem;
+    top: 1.1rem;
+    z-index: 5;
+    user-select: none;
+  }
+
+  /* لینک‌ها به صورت مخفی پیش‌فرض */
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    background: rgba(20, 20, 60, 0.96);
+    position: absolute;
+    top: 3.8rem;
+    left: 0;
+    width: 100%;
+    padding: 1rem 1.5rem;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    z-index: 4;
+  }
+
+  /* لینک‌ها داخل منوی بازشونده */
+  .nav-links a {
+    display: block;
+    width: 100%;
+    color: #fff;
+    font-size: 1rem;
+    text-decoration: none;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .nav-links a:last-child {
+    border-bottom: none;
+  }
+
+  /* وقتی کاربر روی ☰ کلیک کنه، منو باز میشه */
+  .nav-links.show {
+    display: flex;
+    animation: fadeSlideDown 0.3s ease forwards;
+  }
+
+  /* انیمیشن باز شدن منو */
+  @keyframes fadeSlideDown {
+    0% {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* لینک‌ها بالا توی دسکتاپ مخفی بشن */
+  header nav {
+    display: none;
+  }
+}

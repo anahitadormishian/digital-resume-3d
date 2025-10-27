@@ -13,16 +13,22 @@
   <canvas id="canvas"></canvas>
 
   <header>
-    <div class="brand">Anahita Dormishian</div>
-    <nav>
-      <a href="#bio-card" data-scroll-progress="0.26">Profil</a>
-      <a href="#skills-cards" data-scroll-progress="0.36">Compétences</a>
-      <a href="#languages-cards" data-scroll-progress="0.46">Langues</a>
-      <a href="#experience-cards" data-scroll-progress="0.78">Expérience</a>
-      <a href="#education-cards" data-scroll-progress="0.9">Formations</a>
-      <a href="#projects-cards" data-scroll-progress="1">Projets</a>
-    </nav>
-  </header>
+  <div class="brand">Anahita Dormishian</div>
+
+  <!-- 🍔 دکمه همبرگری (فقط در موبایل دیده میشه) -->
+  <div class="menu-toggle" id="menuToggle">☰</div>
+
+  <!-- 🔗 لینک‌های ناوبری (با ID برای کنترل موبایل) -->
+  <nav class="nav-links" id="navLinks">
+    <a href="#bio-card" data-scroll-progress="0.26">Profil</a>
+    <a href="#skills-cards" data-scroll-progress="0.36">Compétences</a>
+    <a href="#languages-cards" data-scroll-progress="0.46">Langues</a>
+    <a href="#experience-cards" data-scroll-progress="0.78">Expérience</a>
+    <a href="#education-cards" data-scroll-progress="0.9">Formations</a>
+    <a href="#projects-cards" data-scroll-progress="1">Projets</a>
+  </nav>
+</header>
+
 
   <div class="scroll-hint">
     <div class="cta-bar" aria-label="Primary actions">
@@ -440,6 +446,22 @@
     });
   </script>
   <div style="height:200vh; width:100%; background:transparent;"></div>
+<script>
+  const menuToggle = document.getElementById('menuToggle');
+  const navLinks = document.getElementById('navLinks');
+
+  // باز و بسته کردن منو
+  menuToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('show');
+  });
+
+  // بستن خودکار منو بعد از کلیک روی لینک
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('show');
+    });
+  });
+</script>
 
 </body>
 </html>
