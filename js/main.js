@@ -32,6 +32,7 @@ const renderer = new THREE.WebGLRenderer({
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.shadowMap.enabled = true;
+renderer.domElement.style.pointerEvents = 'none';
 
 document.documentElement.style.overflowY = 'auto';
 document.body.style.overflowY = 'auto';

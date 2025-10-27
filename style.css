@@ -67,6 +67,7 @@ body::after {
   display: block;
   z-index: 0;
   background: transparent;
+  pointer-events: none;
 }
 
 @keyframes twinkle {
