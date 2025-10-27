@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap');
 
+/* Theme tokens keep lighting and typography consistent */
 :root {
   --overlay-glass: rgba(16, 20, 48, 0.88);
   --overlay-border: rgba(255, 255, 255, 0.16);
@@ -8,6 +9,7 @@
   --text-muted: rgba(255, 255, 255, 0.72);
 }
 
+/* Base layout renders the starfield backdrop and typography */
 html,
 body {
   margin: 0;
@@ -25,6 +27,7 @@ body {
   position: relative;
 }
 
+/* Light layers create depth without blocking interactions */
 body::before,
 body::after {
   content: '';
@@ -59,6 +62,7 @@ body::after {
   opacity: 0.16;
 }
 
+/* Canvas hosts the 3D layer without blocking clicks */
 #canvas {
   position: fixed;
   inset: 0;
@@ -70,6 +74,7 @@ body::after {
   pointer-events: none;
 }
 
+/* Subtle motion keeps the hero section alive */
 @keyframes twinkle {
   0% {
     opacity: 0.18;
@@ -89,11 +94,29 @@ body::after {
 }
 
 @keyframes drift {
-  0% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.12; }
-  50% { opacity: 0.22; }
-  100% { transform: translate3d(-6%, -9%, 0) scale(1.03); opacity: 0.14; }
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.12;
+  }
+  50% {
+    opacity: 0.22;
+  }
+  100% {
+    transform: translate3d(-6%, -9%, 0) scale(1.03);
+    opacity: 0.14;
+  }
 }
 
+@keyframes hintPulse {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Sticky chrome keeps navigation and credits visible */
 header {
   position: fixed;
   top: 0;
@@ -134,6 +157,7 @@ footer {
   z-index: 2;
 }
 
+/* Prompt visitors to keep exploring */
 .scroll-hint {
   position: fixed;
   bottom: 4.5rem;
@@ -156,6 +180,7 @@ footer {
   text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
 }
 
+/* CTA cluster keeps primary actions close together */
 .cta-bar {
   display: inline-flex;
   align-items: center;
@@ -222,6 +247,7 @@ footer {
   opacity: 0.85;
 }
 
+/* Tooltip explains interaction hints without stealing focus */
 .hint-tooltip {
   position: fixed;
   top: 50%;
@@ -256,153 +282,21 @@ footer {
   color: #fff;
 }
 
-.bio-card {
-  position: fixed;
-  left: 50%;
-  top: 54%;
-  transform: translate(-50%, -50%) scale(0.95);
-  width: min(92vw, 680px);
-  padding: 2.5rem 2.8rem;
-  border-radius: 22px;
-  background: rgba(14, 18, 45, 0.88);
-  box-shadow: 0 25px 50px rgba(5, 10, 35, 0.45);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  color: #f9fbff;
-  z-index: 2;
-  opacity: 0;
-  pointer-events: none;
-  display: flex;
-  flex-direction: column;
-  gap: 0.7rem;
-  transition: opacity 0.35s ease, transform 0.4s ease;
-}
-
-.skills-overlay {
-  position: fixed;
-  left: 50%;
-  top: 58%;
-  transform: translate(-50%, -50%) scale(0.9);
-  width: min(92vw, 980px);
-  padding: 2.1rem 2.4rem 6rem;
-  border-radius: 28px;
-  background: #101a34;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 16px 32px rgba(7, 12, 32, 0.28);
-  color: #f8fbff;
-  z-index: 2;
-  opacity: 0;
-  pointer-events: none;
-  display: flex;
-  flex-direction: column;
-  gap: 1.8rem;
-  transition: opacity 0.35s ease, transform 0.4s ease;
-  max-height: calc(100vh - 170px);
-  overflow-y: auto;
-  scrollbar-width: thin;
-}
-
-.languages-overlay {
-  position: fixed;
-  left: 50%;
-  top: 45%;
-  transform: translate(-50%, -50%) scale(0.9);
-  width: min(88vw, 760px);
-  padding: 1.9rem 2.2rem;
-  border-radius: 26px;
-  background: rgba(16, 20, 48, 0.84);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  box-shadow: 0 28px 60px rgba(6, 10, 32, 0.5);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  color: #f9fbff;
-  z-index: 2;
-  opacity: 0;
-  pointer-events: none;
-  display: flex;
-  flex-direction: column;
-  gap: 1.4rem;
-  transition: opacity 0.35s ease, transform 0.4s ease;
-}
-
-.projects-overlay {
-  position: fixed;
-  left: 50%;
-  top: 63%;
-  transform: translate(-50%, -50%) scale(0.9);
-  width: min(92vw, 960px);
-  padding: 2.1rem 2.3rem;
-  border-radius: 30px;
-  background: #101936;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 16px 32px rgba(7, 12, 32, 0.28);
-  color: #f6f8ff;
-  z-index: 2;
-  opacity: 0;
-  pointer-events: none;
-  display: flex;
-  flex-direction: column;
-  gap: 1.6rem;
-  transition: opacity 0.35s ease, transform 0.4s ease;
-  max-height: calc(100vh - 170px);
-  overflow-y: auto;
-  scrollbar-width: thin;
-}
-
-.projects-overlay::-webkit-scrollbar {
-  width: 8px;
-}
-
-.projects-overlay::-webkit-scrollbar-track {
-  background: rgba(15, 22, 46, 0.6);
-  border-radius: 999px;
-}
-
-.projects-overlay::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 999px;
-}
-
-.experience-overlay {
-  position: fixed;
-  left: 50%;
-  top: 44%;
-  transform: translate(-50%, -50%) scale(0.9);
-  width: min(92vw, 960px);
-  padding: 2.2rem 2.3rem;
-  border-radius: 30px;
-  background: #101936;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 16px 32px rgba(7, 12, 32, 0.28);
-  color: #f6f8ff;
-  z-index: 2;
-  opacity: 0;
-  pointer-events: none;
-  display: flex;
-  flex-direction: column;
-  gap: 1.6rem;
-  transition: opacity 0.35s ease, transform 0.4s ease;
-}
-
+/* Overlay shells start hidden; JS toggles the --visible modifier */
+.bio-card,
+.skills-overlay,
+.languages-overlay,
+.projects-overlay,
+.experience-overlay,
 .education-overlay {
   position: fixed;
   left: 50%;
-  top: 45%;
   transform: translate(-50%, -50%) scale(0.9);
-  width: min(90vw, 860px);
-  padding: 2.1rem 2.2rem;
-  border-radius: 28px;
-  background: #101a34;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 14px 28px rgba(7, 12, 32, 0.28);
-  color: #f6f8ff;
+  display: flex;
+  flex-direction: column;
   z-index: 2;
   opacity: 0;
   pointer-events: none;
-  display: flex;
-  flex-direction: column;
-  gap: 1.4rem;
   transition: opacity 0.35s ease, transform 0.4s ease;
 }
 
@@ -415,6 +309,22 @@ footer {
   opacity: 1;
   transform: translate(-50%, -50%) scale(1);
   pointer-events: auto;
+}
+
+/* Bio card anchors the personal introduction */
+.bio-card {
+  top: 54%;
+  transform: translate(-50%, -50%) scale(0.95);
+  width: min(92vw, 680px);
+  padding: 2.5rem 2.8rem;
+  border-radius: 22px;
+  background: rgba(14, 18, 45, 0.88);
+  box-shadow: 0 25px 50px rgba(5, 10, 35, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  color: var(--text-strong);
+  gap: 0.7rem;
 }
 
 .bio-card__eyebrow {
@@ -454,6 +364,22 @@ footer {
   color: rgba(255, 255, 255, 0.92);
 }
 
+/* Skills overlay highlights capabilities and case studies */
+.skills-overlay {
+  top: 58%;
+  width: min(92vw, 980px);
+  padding: 2.1rem 2.4rem 6rem;
+  border-radius: 28px;
+  background: #101a34;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 16px 32px rgba(7, 12, 32, 0.28);
+  color: #f8fbff;
+  gap: 1.8rem;
+  max-height: calc(100vh - 170px);
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
 .skills-overlay__title,
 .languages-overlay__title,
 .projects-overlay__title,
@@ -479,10 +405,10 @@ footer {
   background: #161f3a;
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 10px 22px rgba(6, 10, 28, 0.28);
-  text-align: left;
   display: flex;
   flex-direction: column;
   gap: 1.1rem;
+  text-align: left;
 }
 
 .skills-card h3 {
@@ -541,18 +467,6 @@ footer {
   border-radius: 999px;
 }
 
-.skill-item__details {
-  margin: 0.35rem 0 0;
-  padding-left: 1.1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-  list-style: disc;
-  color: rgba(255, 255, 255, 0.78);
-  font-size: 0.88rem;
-  line-height: 1.45;
-}
-
 .skills-case-studies {
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   padding-top: 1.4rem;
@@ -584,18 +498,18 @@ footer {
   color: rgba(255, 255, 255, 0.9);
 }
 
-.projects-overlay__title {
-  margin: 0;
-  text-align: center;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  font-size: 0.95rem;
-  color: rgba(255, 255, 255, 0.7);
-}
-
-.projects-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+/* Languages overlay showcases proficiency levels */
+.languages-overlay {
+  top: 45%;
+  width: min(88vw, 760px);
+  padding: 1.9rem 2.2rem;
+  border-radius: 26px;
+  background: rgba(16, 20, 48, 0.84);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 28px 60px rgba(6, 10, 32, 0.5);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  color: var(--text-strong);
   gap: 1.4rem;
 }
 
@@ -641,6 +555,164 @@ footer {
   font-size: 0.8rem;
   color: rgba(255, 255, 255, 0.68);
   letter-spacing: 0.02em;
+}
+
+/* Projects overlay mixes storytelling and quick scanning */
+.projects-overlay {
+  top: 43%;
+  width: min(92vw, 960px);
+  padding: 2.1rem 2.3rem;
+  border-radius: 30px;
+  background: #101936;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 16px 32px rgba(7, 12, 32, 0.28);
+  color: #f6f8ff;
+  gap: 1.6rem;
+  max-height: calc(100vh - 170px);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) rgba(15, 24, 50, 0.6);
+}
+
+.projects-overlay::-webkit-scrollbar {
+  width: 8px;
+}
+
+.projects-overlay::-webkit-scrollbar-track {
+  background: rgba(15, 24, 50, 0.6);
+  border-radius: 999px;
+}
+
+.projects-overlay::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+}
+
+.projects-overlay__intro {
+  margin: 0;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.94rem;
+  line-height: 1.6;
+}
+
+.projects-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.4rem;
+  align-items: start;
+}
+
+.project-card {
+  padding: 1.6rem 1.4rem;
+  border-radius: 22px;
+  background: #172340;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 12px 24px rgba(6, 10, 30, 0.28);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.project-card__header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.project-card__title {
+  margin: 0;
+  font-size: 1.18rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+.project-card__subtitle {
+  margin: 0;
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+}
+
+.project-card__summary {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.project-card__tech {
+  margin: 0;
+  font-size: 0.86rem;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.project-card__toggle {
+  align-self: flex-start;
+  margin-top: 0.8rem;
+  padding: 0.45rem 0.95rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: transparent;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.project-card__toggle:hover {
+  transform: translateY(-1px);
+  opacity: 0.85;
+}
+
+.project-card__toggle:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(123, 167, 255, 0.35);
+}
+
+.project-card__details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.82);
+  line-height: 1.55;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.6s ease, opacity 0.4s ease;
+}
+
+.project-card__details--visible {
+  opacity: 1;
+  max-height: 800px;
+}
+
+.project-card__details[hidden] {
+  display: none !important;
+}
+
+.project-card__details p {
+  margin: 0;
+}
+
+.project-card__details a {
+  color: rgba(123, 167, 255, 0.9);
+  text-decoration: underline;
+}
+
+/* Experience overlay keeps timelines easy to scan */
+.experience-overlay {
+  top: 44%;
+  width: min(92vw, 960px);
+  padding: 2.2rem 2.3rem;
+  border-radius: 30px;
+  background: #101936;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 16px 32px rgba(7, 12, 32, 0.28);
+  color: #f6f8ff;
+  gap: 1.6rem;
 }
 
 .experience-list {
@@ -699,6 +771,19 @@ footer {
   line-height: 1.45;
 }
 
+/* Education overlay mirrors the experience layout */
+.education-overlay {
+  top: 45%;
+  width: min(90vw, 860px);
+  padding: 2.1rem 2.2rem;
+  border-radius: 28px;
+  background: #101a34;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 14px 28px rgba(7, 12, 32, 0.28);
+  color: #f6f8ff;
+  gap: 1.4rem;
+}
+
 .education-list {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -736,176 +821,63 @@ footer {
   line-height: 1.45;
 }
 
-
-.projects-overlay {
-  position: fixed;
-  left: 50%;
-  top: 66%;
-  transform: translate(-50%, -50%) scale(0.9);
-  width: min(92vw, 960px);
-  padding: 2.2rem 2.4rem;
-  border-radius: 32px;
-  background: rgba(16, 28, 56, 0.96);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 18px 44px rgba(7, 12, 34, 0.36);
-  color: #f6f8ff;
-  z-index: 2;
-  opacity: 0;
-  pointer-events: none;
-  display: flex;
-  flex-direction: column;
-  gap: 1.6rem;
-  transition: opacity 0.35s ease, transform 0.4s ease;
-  max-height: calc(100vh - 170px);
-  overflow-y: auto;
-  scrollbar-width: thin;
-}
-
-.projects-overlay--visible {
-  opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
-  pointer-events: auto;
-}
-
-.projects-overlay::-webkit-scrollbar {
-  width: 8px;
-}
-
-.projects-overlay::-webkit-scrollbar-track {
-  background: rgba(15, 24, 50, 0.6);
-  border-radius: 999px;
-}
-
-.projects-overlay::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.18);
-  border-radius: 999px;
-}
-
-.projects-overlay__title {
-  margin: 0;
-  text-align: center;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  font-size: 0.95rem;
-  color: rgba(255, 255, 255, 0.72);
-}
-
-.projects-overlay__intro {
-  margin: 0;
-  text-align: center;
-  color: rgba(255, 255, 255, 0.78);
-  font-size: 0.94rem;
-  line-height: 1.6;
-}
-
-.projects-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1.4rem;
-}
-
-.project-card {
-  padding: 1.6rem 1.4rem;
-  border-radius: 22px;
-  background: #172340;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 12px 24px rgba(6, 10, 30, 0.28);
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.project-card__header {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-}
-
-.project-card__title {
-  margin: 0;
-  font-size: 1.18rem;
-  font-weight: 600;
-  letter-spacing: 0.03em;
-}
-
-.project-card__subtitle {
-  margin: 0;
-  font-size: 0.9rem;
-  letter-spacing: 0.04em;
-  color: rgba(255, 255, 255, 0.7);
-  text-transform: uppercase;
-}
-
-.project-card__summary {
-  margin: 0;
-  color: rgba(255, 255, 255, 0.82);
-  font-size: 0.92rem;
-  line-height: 1.45;
-}
-
-.project-card__tech {
-  margin: 0;
-  font-size: 0.86rem;
-  color: rgba(255, 255, 255, 0.72);
-}
-
-.project-card__toggle {
-  align-self: flex-start;
-  padding: 0.45rem 0.95rem;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.28);
-  background: transparent;
-  color: rgba(255, 255, 255, 0.88);
-  font-size: 0.85rem;
-  cursor: pointer;
-  transition: transform 0.2s ease, opacity 0.2s ease;
-}
-
-.project-card__toggle:hover {
-  transform: translateY(-1px);
-  opacity: 0.85;
-}
-
-.project-card__toggle:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px rgba(123, 167, 255, 0.35);
-}
-
-.project-card__details {
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.82);
-  line-height: 1.55;
-}
-
-.project-card__details[hidden] {
-  display: none !important;
-}
-
-.project-card__details p {
-  margin: 0;
-}
-
-.project-card__details a {
-  color: rgba(123, 167, 255, 0.9);
-  text-decoration: underline;
-}
-
+/* Responsive tweaks keep overlays readable on smaller screens */
 @media (max-width: 680px) {
   .cta-bar {
     flex-direction: column;
     gap: 0.6rem;
   }
 
-  .cta-links { width: 100%; }
+  .cta-links {
+    width: 100%;
+  }
 
-  .bio-card { top: auto; bottom: 7rem; transform: translate(-50%, 0) scale(0.92); }
-  .skills-overlay { top: auto; bottom: 6.6rem; transform: translate(-50%, 0) scale(0.92); width: calc(100vw - 2.5rem); padding: 1.7rem 1.4rem; }
-  .skills-overlay__grid { grid-template-columns: 1fr; }
-  .languages-overlay { top: auto; bottom: 5.8rem; transform: translate(-50%, 0) scale(0.92); width: calc(100vw - 2.5rem); padding: 1.6rem 1.3rem; }
-  .languages-grid { grid-template-columns: 1fr; }
+  .bio-card {
+    top: auto;
+    bottom: 7rem;
+    transform: translate(-50%, 0) scale(0.92);
+    width: calc(100vw - 2.5rem);
+    padding: 1.8rem 1.6rem;
+  }
+
+  .bio-card--visible {
+    transform: translate(-50%, 0) scale(1);
+  }
+
+  .skills-overlay {
+    top: auto;
+    bottom: 6.6rem;
+    transform: translate(-50%, 0) scale(0.92);
+    width: calc(100vw - 2.5rem);
+    padding: 1.7rem 1.4rem;
+    gap: 1.3rem;
+  }
+
+  .skills-overlay--visible {
+    transform: translate(-50%, 0) scale(1);
+  }
+
+  .skills-overlay__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .languages-overlay {
+    top: auto;
+    bottom: 5.8rem;
+    transform: translate(-50%, 0) scale(0.92);
+    width: calc(100vw - 2.5rem);
+    padding: 1.6rem 1.3rem;
+    gap: 1.1rem;
+  }
+
+  .languages-overlay--visible {
+    transform: translate(-50%, 0) scale(1);
+  }
+
+  .languages-grid {
+    grid-template-columns: 1fr;
+  }
+
   .projects-overlay {
     top: auto;
     bottom: 4.8rem;
@@ -919,98 +891,58 @@ footer {
     transform: translate(-50%, 0) scale(1);
   }
 
-  .projects-list { grid-template-columns: 1fr; }
-  .experience-overlay { top: auto; bottom: 5rem; transform: translate(-50%, 0) scale(0.9); width: calc(100vw - 2.5rem); padding: 1.8rem 1.4rem; }
-  .experience-list { grid-template-columns: 1fr; }
-  .education-overlay { top: auto; bottom: 3.4rem; transform: translate(-50%, 0) scale(0.9); width: calc(100vw - 2.5rem); padding: 1.7rem 1.3rem; }
-  .education-list { grid-template-columns: 1fr; }
+  .projects-list {
+    grid-template-columns: 1fr;
+  }
+
+  .experience-overlay {
+    top: auto;
+    bottom: 5rem;
+    transform: translate(-50%, 0) scale(0.9);
+    width: calc(100vw - 2.5rem);
+    padding: 1.8rem 1.4rem;
+    gap: 1.4rem;
+  }
+
+  .experience-overlay--visible {
+    transform: translate(-50%, 0) scale(1);
+  }
+
+  .experience-list {
+    grid-template-columns: 1fr;
+  }
+
+  .education-overlay {
+    top: auto;
+    bottom: 3.4rem;
+    transform: translate(-50%, 0) scale(0.9);
+    width: calc(100vw - 2.5rem);
+    padding: 1.7rem 1.3rem;
+  }
+
+  .education-overlay--visible {
+    transform: translate(-50%, 0) scale(1);
+  }
+
+  .education-list {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (min-width: 681px) and (max-width: 1024px) {
-  .skills-overlay__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .languages-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .experience-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .education-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
+  .skills-overlay__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 
-@keyframes hintPulse {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
-}
-.project-card__details {
-  max-height: 0;
-  overflow: hidden;
-  opacity: 0;
-  transition: max-height 0.6s ease, opacity 0.4s ease;
-}
+  .languages-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 
-.project-card__details--visible {
-  opacity: 1;
-  max-height: 800px;
-}
+  .experience-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 
-.project-card__toggle {
-  margin-top: 0.8rem;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
-  padding: 0.6rem 1.2rem;
-  border: none;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-.project-card__toggle:hover {
-  background: rgba(255, 255, 255, 0.25);
-}
-.projects-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1.4rem;
-  align-items: start;
-}
-.project-card__details {
-  max-height: 0;
-  overflow: hidden;
-  opacity: 0;
-  transition: max-height 0.6s ease, opacity 0.4s ease;
-}
-
-.project-card__details--visible {
-  opacity: 1;
-  max-height: 900px; /* افزایش دادیم تا فضای کافی باشه */
-}
-.projects-section {
-  padding-bottom: 8rem;
-  margin-bottom: 3rem;
-}
-.projects-overlay {
-  position: fixed;
-  left: 50%;
-  top: 45%;
-  transform: translate(-50%, -50%) scale(0.9);
-  width: min(92vw, 960px);
-  height: calc(100vh - 220px); /* 👈 همیشه یه ارتفاع ثابت */
-  padding: 2.2rem 2.4rem;
-  border-radius: 32px;
-  background: rgba(16, 28, 56, 0.96);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 18px 44px rgba(7, 12, 34, 0.36);
-  color: #f6f9ff;
-  z-index: 2;
-  opacity: 0;
-  pointer-events: none;
-  display: flex;
-  flex-direction: column;
-  gap: 1.6rem;
-  overflow-y: scroll; /* 👈 همیشه فعال باشه */
-  overflow-x: hidden;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(255,255,255,0.25) rgba(16,28,56,0.6);
-  transition: opacity 0.35s ease, transform 0.4s ease;
-}
-
-.projects-overlay--visible {
-  opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
-  pointer-events: auto;
+  .education-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
