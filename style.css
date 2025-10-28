@@ -127,7 +127,6 @@ header {
   justify-content: space-between;
   align-items: center;
   background: rgba(20, 20, 60, 0.5);
-  backdrop-filter: blur(10px);
   z-index: 2;
 }
 
